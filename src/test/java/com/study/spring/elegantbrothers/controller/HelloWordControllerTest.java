@@ -26,12 +26,13 @@ class HelloWordControllerTest {
 
     @Test
     void mockMvcTest() throws Exception {
+        // http 를 이용해서 테스트를 진행할수 있도록 한다.
         mockMvc = MockMvcBuilders.standaloneSetup(helloWordController).build();
 
         mockMvc.perform(
-                MockMvcRequestBuilders.get("/api/helloWorld")
-        ).andDo(MockMvcResultHandlers.print())
+                MockMvcRequestBuilders.get("/api/helloWorld")       // http get 메소드를 이용해서 호출한다.
+        ).andDo(MockMvcResultHandlers.print())                                 // request, response 정보에 따라 저곰더 자세하게 나온다
         .andExpect(MockMvcResultMatchers.status().isOk())
-        .andExpect(MockMvcResultMatchers.content().string("helloWorld"));
+        .andExpect(MockMvcResultMatchers.content().string("helloWorld"));       // response 에 내용이 helloWolrd인지 확인한다.
     }
 }
