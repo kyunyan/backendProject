@@ -17,20 +17,16 @@ class UserRepositoryTest {
 
     @Test
     void crud(){
-        User user = new User();
-        user.setUserNm("이도검");
-        user.setUserID("lee");
-        user.setUserAge(30);
-        user.setBirthday(LocalDate.of(1992,02,11));
-        userRepository.save(user);
+        User USER = new User();
+        USER.setUserNm("이건완");
+        USER.setUserID("lee");
+        USER.setUserAge(30);
+        //user.setBirthday(LocalDate.of(1992,02,11));
+        userRepository.save(USER);
 
         List<User> userList = userRepository.findAll();
 
         System.out.println(userList);
     }
 
-    @Test
-    void allArgsConstructor(){
-        User user = new User();
-    }
 }
