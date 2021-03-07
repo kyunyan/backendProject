@@ -1,15 +1,34 @@
+server:
+  port: 8000
+  servlet:
+    #context-path: /blog
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
 spring :
-  jpa :
-    show-sql : true
-    format-sql : true
-    use_sql_comments : true
-    new_generator_mappings : false
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MariaDB53Dialect
   datasource:
-      url: jdbc:mysql://54.180.220.116:3306/SHOPPING_MALL
-      username: root
-      password: mariadb
-      driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mysql://54.180.220.116:3306/SHOPPING_MALL
+    username: root
+    password: mariadb
+    driver-class-name: org.mariadb.jdbc.Driver
+
+  jpa:
+    open-in-view: true
+    hibernate:
+      #ddl-auto: create
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        # use-new-id-generator-mappings 는 mysql로 말하면 auto_increment 오라클로 말하면 시퀀스를 어떤식으로 사용할지 방식을 결정하는 것인데 false를 하면 jpa가 사용하는 기본 넘버링 전략을 따라가지 않는다는 뜻이고 true를 하면 기본 넘버링 전략을 따라간다는 뜻이다.
+      use-new-id-generator-mappings: false
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+
+    jackson:
+      serialization:
+        fail-on-empty-beans: false # Lazy-loading으로 인해 empty-beans이 생길 수 있다. 너그럽게 빈 객체를 허락
+
+
 

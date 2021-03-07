@@ -26,7 +26,7 @@ class UserRepositoryTest {
 
         List<User> userList = userRepository.findAll();
 
-        System.out.println(userList);
+        System.out.println("user : "+ userList);
     }
 
 }

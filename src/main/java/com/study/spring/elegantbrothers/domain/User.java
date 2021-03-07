@@ -1,6 +1,5 @@
 package com.study.spring.elegantbrothers.domain;
 
-
 import lombok.*;
 
 import javax.persistence.Column;
@@ -9,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.time.LocalDate;
 
 @Entity
 //@Getter
@@ -19,7 +17,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @RequiredArgsConstructor        // 필요한 것을 필수로
 @Data       // getter , setter, toString
-@Table(name = "USER")
+@Table(name = "USERS")
 public class User {
 
     @Id
