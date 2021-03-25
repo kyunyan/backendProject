@@ -1,4 +1,4 @@
-package com.study.spring.elegantbrothers.domain;
+package com.study.spring.elegantbrothers.user.domain;
 
 import lombok.*;
 
@@ -35,7 +35,5 @@ public class User {
 
     @Column(name="USER_AGE")
     private int userAge;
-    //private LocalDate birthday;
-    //private String phoneNumber;
 
 }

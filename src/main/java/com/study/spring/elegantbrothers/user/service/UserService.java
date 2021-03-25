@@ -1,7 +1,7 @@
-package com.study.spring.elegantbrothers.service;
+package com.study.spring.elegantbrothers.user.service;
 
-import com.study.spring.elegantbrothers.domain.User;
-import com.study.spring.elegantbrothers.repository.UserRepository;
+import com.study.spring.elegantbrothers.user.domain.User;
+import com.study.spring.elegantbrothers.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

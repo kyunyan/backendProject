@@ -1,14 +1,12 @@
 package com.study.spring.elegantbrothers.repository;
 
-import com.study.spring.elegantbrothers.domain.User;
+import com.study.spring.elegantbrothers.user.domain.User;
+import com.study.spring.elegantbrothers.user.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.time.LocalDate;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class UserRepositoryTest {

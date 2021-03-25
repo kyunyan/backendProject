@@ -1,6 +1,6 @@
-package com.study.spring.elegantbrothers.repository;
+package com.study.spring.elegantbrothers.user.repository;
 
-import com.study.spring.elegantbrothers.domain.User;
+import com.study.spring.elegantbrothers.user.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
