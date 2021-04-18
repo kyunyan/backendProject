@@ -1,23 +1,21 @@
 package com.study.spring.elegantbrothers.user.domain;
 
-import com.study.spring.elegantbrothers.common.domain.CommonDomain;
+import com.study.spring.elegantbrothers.common.domain.BaseEntity;
 import lombok.*;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @NoArgsConstructor // 생성자
 @AllArgsConstructor
 @Entity
-@Table(name = "SHOPPING")
-public class Shopping extends CommonDomain {
+@Table(name = "SHOPPING", uniqueConstraints = {@UniqueConstraint(name="PK_SHOPPING" , columnNames = {"GOODS_ID"})})
+public class Shopping extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "GOODS_ID", length = 20, nullable = false, unique = true)
+    @Column(name = "GOODS_ID", length = 20, nullable = false)
     private long goodsId;                         // 상품ID
 
     @Column(name = "CSTMR_ID", length = 20, nullable = false)
@@ -43,8 +41,8 @@ public class Shopping extends CommonDomain {
     private ShoppingMaster shoppingMaster;
 
     @Builder
-    public Shopping(String inputId, LocalDateTime inputDt, String inputIp, String updtId, String updtIp, LocalDateTime updtDt, long goodsId, String cstmrId, int goodsOrderRepr, String goodsPc, String goodsName) {
-        super(inputId, inputDt, inputIp, updtId, updtIp, updtDt);
+    public Shopping(String inputId, String inputIp, String updtId, String updtIp, long goodsId, String cstmrId, int goodsOrderRepr, String goodsPc, String goodsName) {
+        super(inputId, inputIp, updtId, updtIp);
 
         Assert.hasText(String.valueOf(goodsId), "goodsId must not be empty");
         Assert.hasText(cstmrId, "cstmrId must not be empty");

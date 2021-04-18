@@ -1,7 +1,6 @@
 package com.study.spring.elegantbrothers.order.domain;
 
-import com.study.spring.elegantbrothers.common.domain.CommonDomain;
-import com.study.spring.elegantbrothers.user.domain.AttentionMaster;
+import com.study.spring.elegantbrothers.common.domain.BaseEntity;
 import lombok.*;
 import org.springframework.util.Assert;
 
@@ -12,18 +11,18 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor // 생성자
 @AllArgsConstructor
-@Table(name = "ORDER")
-public class Order extends CommonDomain {
+@Table(name = "ORDER", uniqueConstraints = {@UniqueConstraint(name="PK_ORDER" , columnNames = {"ORDER_ID", "GOODS_ID"})})
+public class Order extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ORDER_ID", length = 20, nullable = false ,unique = true)
+    @Column(name = "ORDER_ID", length = 20 )
     private long orderId;                     // 주문ID
 
     @Column(name="CSTMR_ID", length = 20, nullable = false)
     private String cstmrId;                       // 고객ID
 
-    @Column(name="CSTMR_ID", length = 20, nullable = false)
+    @Column(name="GOODS_ID", length = 20)
     private long goodsId;                     // 상품ID
 
     @Column(name="GOODS_ORDER_REPR", length = 7)
@@ -44,8 +43,8 @@ public class Order extends CommonDomain {
     private Payment payment;
 
     @Builder
-    public Order(String inputId, LocalDateTime inputDt, String inputIp, String updtId, String updtIp, LocalDateTime updtDt, long orderId, String cstmrId, long goodsId, int goodsOrderPepr, String goodsPc, String goodsName) {
-        super(inputId, inputDt, inputIp, updtId, updtIp, updtDt);
+    public Order(String inputId,  String inputIp, String updtId, String updtIp,  long orderId, String cstmrId, long goodsId, int goodsOrderPepr, String goodsPc, String goodsName) {
+        super(inputId, inputIp, updtId, updtIp);
         Assert.hasText(String.valueOf(orderId), "orderId must not be empty");
         Assert.hasText(cstmrId, "cstmrId must not be empty");
         Assert.hasText(String.valueOf(goodsId), "goodsId must not be empty");

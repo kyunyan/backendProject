@@ -1,6 +1,6 @@
 package com.study.spring.elegantbrothers.user.domain;
 
-import com.study.spring.elegantbrothers.common.domain.CommonDomain;
+import com.study.spring.elegantbrothers.common.domain.BaseEntity;
 import lombok.*;
 import org.springframework.util.Assert;
 
@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "ATTENTION_MASTER")
-public class AttentionMaster extends CommonDomain {
+public class AttentionMaster extends BaseEntity {
     @Id
     //@Column(name = "CSTMR_ID", length = 20, nullable = false)
     private String cstmrId;                       // 고객ID
@@ -38,8 +38,8 @@ public class AttentionMaster extends CommonDomain {
     private List<Attention> attentions = new ArrayList<>();
 
     @Builder
-    public AttentionMaster(String inputId, LocalDateTime inputDt, String inputIp, String updtId, String updtIp, LocalDateTime updtDt, String cstmrId, String goodsPc, String goodsName, int goodsLike, String goodsDc) {
-        super(inputId, inputDt, inputIp, updtId, updtIp, updtDt);
+    public AttentionMaster(String inputId, String inputIp, String updtId, String updtIp, String cstmrId, String goodsPc, String goodsName, int goodsLike, String goodsDc) {
+        super(inputId, inputIp, updtId, updtIp);
         Assert.hasText(cstmrId, "cstmrId must not be empty");
 
         this.cstmrId = cstmrId;

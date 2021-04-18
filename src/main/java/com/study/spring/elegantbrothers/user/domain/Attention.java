@@ -1,10 +1,9 @@
 package com.study.spring.elegantbrothers.user.domain;
 
-import com.study.spring.elegantbrothers.common.domain.CommonDomain;
+import com.study.spring.elegantbrothers.common.domain.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
@@ -15,11 +14,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Entity
 @Table(name = "ATTENTION")
-public class Attention extends CommonDomain {
+public class Attention extends BaseEntity {
 
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    //@Column(name = "CSTMR_ID", length = 20, nullable = false)
+    @Column(name = "CSTMR_ID", length = 20)
     private String cstmrId;                       // 고객ID
 
     @Column(name = "GOODS_ID", length = 20, nullable = false)
@@ -41,8 +40,8 @@ public class Attention extends CommonDomain {
     @JoinColumn(name = "CSTMR_ID", nullable = true)
     private AttentionMaster attentionMaster;
 
-    public Attention(String inputId, LocalDateTime inputDt, String inputIp, String updtId, String updtIp, LocalDateTime updtDt, String cstmrId, long goodsId, String goodsPc, String goodsName) {
-        super(inputId, inputDt, inputIp, updtId, updtIp, updtDt);
+    public Attention(String inputId,  String inputIp, String updtId, String updtIp, String cstmrId, long goodsId, String goodsPc, String goodsName) {
+        super(inputId, inputIp, updtId, updtIp);
         Assert.hasText(cstmrId, "cstmrId must not be empty");
         Assert.hasText(String.valueOf(goodsId), "goodsId must not be empty");
 

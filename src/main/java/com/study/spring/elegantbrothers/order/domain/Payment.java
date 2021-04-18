@@ -1,7 +1,6 @@
 package com.study.spring.elegantbrothers.order.domain;
 
-import com.study.spring.elegantbrothers.common.domain.CommonDomain;
-import com.study.spring.elegantbrothers.user.domain.Attention;
+import com.study.spring.elegantbrothers.common.domain.BaseEntity;
 import lombok.*;
 import org.springframework.util.Assert;
 
@@ -14,12 +13,12 @@ import java.util.List;
 @NoArgsConstructor // 생성자
 //@AllArgsConstructor
 @Entity
-@Table(name = "PAYMENT")
-public class Payment extends CommonDomain {
+@Table(name = "PAYMENT", uniqueConstraints = {@UniqueConstraint(name="PK_PAYMENT" , columnNames = {"DLVR_SETLE_NO"})})
+public class Payment extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "DLVR_SETLE_NO", length = 20, nullable = false, unique = true)
+    @Column(name = "DLVR_SETLE_NO", length = 20)
     private long dlvrSetleNo;       // 배달결제번호
 
     /*@ManyToOne
@@ -27,6 +26,9 @@ public class Payment extends CommonDomain {
     private Order order;*/
     @Column(name = "ORDER_ID", length = 20, nullable = false)
     private long orderId;         // 주문ID
+
+    @Column(name="GOODS_ID", length = 20, nullable = false)
+    private long goodsId;                     // 상품ID
 
     @Column(name = "DLVR_ADRES", length = 150)
     private String dlvrAdres;       // 배달주소
@@ -44,8 +46,8 @@ public class Payment extends CommonDomain {
     private List<Order> orders = new ArrayList<>();
 
     @Builder
-    public Payment(long dlvrSetleNo, long orderId, String dlvrAdres, String dlvrTlphonNo, String dlvrPostNo, String dlvrDetailAdres, String inputId, String inputIp, LocalDateTime inputDt, String updtId, String updtIp, LocalDateTime updtDt) {
-        super(inputId, inputDt, inputIp, updtId, updtIp,updtDt);
+    public Payment(long dlvrSetleNo, long orderId, String dlvrAdres, String dlvrTlphonNo, String dlvrPostNo, String dlvrDetailAdres, String inputId, String inputIp,  String updtId, String updtIp) {
+        super(inputId, inputIp, updtId, updtIp);
         Assert.hasText(String.valueOf(dlvrSetleNo), "dlvrSetleNo must not be empty");
         Assert.hasText(String.valueOf(orderId), "orderId must not be empty");
 

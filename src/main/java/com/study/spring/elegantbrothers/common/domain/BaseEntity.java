@@ -19,16 +19,17 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)         // 기본 생성자 생성
 
 @Getter
-public abstract class CommonDomain {
+@MappedSuperclass
+public class BaseEntity {
     @Id
-    @Column(name = "INPUT_ID", length = 20)
+    @Column(name = "INPUT_ID", length = 20, updatable = false)
     private String inputId;                     // 입력ID
 
     @Id
-    @Column(name = "INPUT_DT")
+    @Column(name = "INPUT_DT", updatable = false)
     private LocalDateTime inputDt;              // 입력 일시
 
-    @Column(name = "INPUT_IP", length = 20)
+    @Column(name = "INPUT_IP", length = 20, updatable = false)
     private String inputIp;                     // 입력IP
 
     @Column(name = "UPDT_ID", length = 20)
@@ -40,16 +41,21 @@ public abstract class CommonDomain {
     @Column(name = "UPDT_DT")
     private LocalDateTime updtDt;               // 수정 일시
 
+    @PrePersist
+    public void prePersist(){
+        LocalDateTime now = LocalDateTime.now();
+        inputDt = now;
+        updtDt = now;
+    }
+
     /*
     * protected로 변경하면 new Member() 사용을 막을 수 있어 객체의 일관성을 더 유지할 수 있습니다.
     * */
     @Builder
-    public CommonDomain(String inputId, LocalDateTime inputDt, String inputIp, String updtId, String updtIp, LocalDateTime updtDt){
+    public BaseEntity(String inputId, String inputIp, String updtId, String updtIp){
 
         this.inputId = inputId;
-        this.inputDt = inputDt;
         this.inputIp = inputIp;
-        this.updtDt = updtDt;
         this.updtId = updtIp;
         this.updtId = updtId;
     }

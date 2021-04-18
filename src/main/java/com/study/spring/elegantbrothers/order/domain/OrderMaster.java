@@ -1,11 +1,9 @@
 package com.study.spring.elegantbrothers.order.domain;
 
-import com.study.spring.elegantbrothers.common.domain.CommonDomain;
-import com.study.spring.elegantbrothers.user.domain.Attention;
+import com.study.spring.elegantbrothers.common.domain.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
@@ -17,12 +15,12 @@ import java.util.List;
 @NoArgsConstructor // 생성자
 @AllArgsConstructor
 @Entity
-@Table(name = "ORDER_MASTER")
-public class OrderMaster extends CommonDomain {
+@Table(name = "ORDER_MASTER", uniqueConstraints = {@UniqueConstraint(name="PK_ORDER_MASTER" , columnNames = {"ORDER_ID"})})
+public class OrderMaster extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ORDER_ID", length = 20, nullable = false, unique = true)
+    @Column(name = "ORDER_ID", length = 20)
     private long orderId;                       // 주문 ID
 
     @Column(name = "ORDER_ID", length = 20)
@@ -46,8 +44,8 @@ public class OrderMaster extends CommonDomain {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "ORDER_ID")
     private List<Order> orders = new ArrayList<>();
 
-    public OrderMaster(String inputId, LocalDateTime inputDt, String inputIp, String updtId, String updtIp, LocalDateTime updtDt, long orderId, String cstmrId, int goodsOrderRepr, String goodsPc, String goodsName, int goodsLike, String goodsDc) {
-        super(inputId, inputDt, inputIp, updtId, updtIp, updtDt);
+    public OrderMaster(String inputId,  String inputIp, String updtId, String updtIp, long orderId, String cstmrId, int goodsOrderRepr, String goodsPc, String goodsName, int goodsLike, String goodsDc) {
+        super(inputId, inputIp, updtId, updtIp);
         Assert.hasText(String.valueOf(orderId), "orderId must not be empty");
         this.orderId = orderId;
         this.cstmrId = cstmrId;
